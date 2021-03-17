@@ -11,7 +11,7 @@ def is_leaf(model):
 def get_num_gen(gen):
     return sum(1 for x in gen)
 
-def add_mBSN(model):
+def add_mBiSN(model):
     modules = copy.deepcopy(model._modules)
     for m in modules:
         child = modules[m]
@@ -34,7 +34,7 @@ def add_mBSN(model):
             elif isinstance(child, nn.BatchNorm1d):
                 model._modules[m] = Empty()
         else:
-            add_mBSN(model._modules[m])
+            add_mBiSN(model._modules[m])
 
 class Empty(nn.Module):
     def __init__(self):
