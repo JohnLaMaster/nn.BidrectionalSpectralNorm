@@ -25,8 +25,6 @@ citation = OrderedDict({'Bidirectional Spectral Norm': {'Title': 'Mean Spectral 
                                                         'Modified by': 'Ing. John LaMaster'}})
 
 
-
-
 '''
 Code modified from: https://github.com/AntixK/mean-spectral-norm
 By: Anand Krishnamoorthy
@@ -58,7 +56,7 @@ def spectral_norm(W, u=None, Num_iter=100):
     sigma = torch.sum(F.linear(_u, torch.transpose(W.data, 0,1)) * _v)
     return sigma, _u
 
-class BSNConv1d(conv._ConvNd):
+class BiSNConv1d(conv._ConvNd):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True):
         kernel_size = _single(kernel_size)
         stride = _single(stride)
@@ -81,7 +79,7 @@ class BSNConv1d(conv._ConvNd):
         return F.conv1d(input, self.weight, self.bias, self.stride,
                         self.padding, self.dilation, self.groups)
 
-class BSNConv2d(conv._ConvNd):
+class BiSNConv2d(conv._ConvNd):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True):
         kernel_size = _pair(kernel_size)
         stride = _pair(stride)
@@ -104,7 +102,7 @@ class BSNConv2d(conv._ConvNd):
         return F.conv2d(input, self.weight, self.bias, self.stride,
                         self.padding, self.dilation, self.groups)
 
-class BSNConv3d(conv._ConvNd):
+class BiSNConv3d(conv._ConvNd):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True):
         kernel_size = _triple(kernel_size)
         stride = _triple(stride)
