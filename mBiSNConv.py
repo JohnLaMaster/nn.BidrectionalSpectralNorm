@@ -1,7 +1,7 @@
 import torch 
 import torch.nn as nn
-from modules.norm.pytorch_bidirectional_spectral_norm import bidirectional_spectral_norm
-from modules.norm.SNlayers import SNLinear
+from bidirectional_spectral_norm import bidirectional_spectral_norm
+from spectral_norm_modules import SNLinear
 import copy
 
 
@@ -31,9 +31,7 @@ def add_mBSN(model):
                 except RuntimeError:
                     bias = False
                 model._modules[m] = SNLinear(child.in_features, child.out_features, True)
-                # del model._modules[m]
             elif isinstance(child, nn.BatchNorm1d):
-                # del model._modules[m]
                 model._modules[m] = Empty()
         else:
             add_mBSN(model._modules[m])
